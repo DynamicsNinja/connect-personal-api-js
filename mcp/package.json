@@ -1,0 +1,58 @@
+{
+  "name": "garmin-connect-personal-api-mcp",
+  "version": "1.0.0",
+  "description": "Unofficial MCP server for the Garmin Connect Personal API: let Claude and other AI assistants read your sleep, HRV, steps, stress, Body Battery, and activities",
+  "license": "Apache-2.0",
+  "author": "Ivan Ficko",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DynamicsNinja/connect-personal-api-js.git",
+    "directory": "mcp"
+  },
+  "homepage": "https://github.com/DynamicsNinja/connect-personal-api-js/tree/main/mcp#readme",
+  "bugs": {
+    "url": "https://github.com/DynamicsNinja/connect-personal-api-js/issues"
+  },
+  "mcpName": "io.github.DynamicsNinja/garmin-connect-personal-api",
+  "type": "module",
+  "exports": "./src/server.js",
+  "bin": {
+    "garmin-connect-personal-api-mcp": "bin/garmin-connect-personal-api-mcp.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.4"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "prepack": "node -e \"require('fs').copyFileSync('../LICENSE', 'LICENSE')\""
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "garmin-connect-personal-api-js": "^1.0.1",
+    "zod": "^4.6.7"
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "claude",
+    "ai",
+    "garmin",
+    "garmin-connect",
+    "personal-api",
+    "fitness",
+    "health",
+    "sleep",
+    "hrv",
+    "steps",
+    "body-battery",
+    "wearables",
+    "quantified-self"
+  ]
+}
