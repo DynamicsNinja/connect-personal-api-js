@@ -1,0 +1,42 @@
+{
+  "name": "garmin-connect-personal-api-js",
+  "version": "1.0.0",
+  "description": "JavaScript client for the Garmin Connect Personal API",
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    }
+  },
+  "types": "./types/index.d.ts",
+  "bin": {
+    "gc-personal": "bin/gc-personal.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "types",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.4"
+  },
+  "scripts": {
+    "test": "node --test",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build:types": "tsc -p tsconfig.json",
+    "prepack": "npm run build:types"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  },
+  "keywords": [
+    "garmin",
+    "garmin-connect",
+    "personal-api"
+  ]
+}

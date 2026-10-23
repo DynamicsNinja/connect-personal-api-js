@@ -1,0 +1,7 @@
+node_modules/
+types/
+coverage/
+*.tgz
+.env
+connect-personal-api-key
+connect-personal-api-bearer-token.json
