@@ -1,7 +1,7 @@
 {
   "name": "garmin-connect-personal-api-js",
-  "version": "1.0.0",
-  "description": "JavaScript client for the Garmin Connect Personal API",
+  "version": "1.0.1",
+  "description": "Unofficial JavaScript client and CLI for the Garmin Connect Personal API: sleep, HRV, steps, stress, Body Battery, activities, and more",
   "license": "Apache-2.0",
   "author": "Ivan Ficko",
   "repository": {
@@ -17,6 +17,10 @@
     ".": {
       "types": "./types/index.d.ts",
       "default": "./src/index.js"
+    },
+    "./commands": {
+      "types": "./types/commands.d.ts",
+      "default": "./src/commands.js"
     }
   },
   "types": "./types/index.d.ts",
@@ -34,7 +38,7 @@
     "node": ">=20.4"
   },
   "scripts": {
-    "test": "node --test",
+    "test": "node --test tests/*.test.js",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "build:types": "tsc -p tsconfig.json",
     "prepack": "npm run build:types"
@@ -46,6 +50,22 @@
   "keywords": [
     "garmin",
     "garmin-connect",
-    "personal-api"
+    "personal-api",
+    "fitness",
+    "health",
+    "sleep",
+    "hrv",
+    "heart-rate",
+    "steps",
+    "stress",
+    "body-battery",
+    "spo2",
+    "activities",
+    "fit",
+    "wearables",
+    "quantified-self",
+    "api-client",
+    "cli",
+    "typescript"
   ]
 }

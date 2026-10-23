@@ -1,4 +1,6 @@
 node_modules/
+# Copied from the repository root when the MCP package is packed.
+mcp/LICENSE
 types/
 coverage/
 *.tgz

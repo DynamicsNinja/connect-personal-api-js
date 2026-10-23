@@ -1,5 +1,12 @@
 # Garmin Connect Personal API Client for JavaScript
 
+[![npm](https://img.shields.io/npm/v/garmin-connect-personal-api-js)](https://www.npmjs.com/package/garmin-connect-personal-api-js)
+[![CI](https://github.com/DynamicsNinja/connect-personal-api-js/actions/workflows/ci.yml/badge.svg)](https://github.com/DynamicsNinja/connect-personal-api-js/actions/workflows/ci.yml)
+[![Node.js](https://img.shields.io/node/v/garmin-connect-personal-api-js)](https://nodejs.org)
+[![License](https://img.shields.io/npm/l/garmin-connect-personal-api-js)](LICENSE)
+
+> **Unofficial.** This is a community port. It isn't affiliated with or endorsed by Garmin.
+
 A JavaScript port of
 [garmin/connect-personal-api-python](https://github.com/garmin/connect-personal-api-python),
 a small client for reading data from
@@ -12,6 +19,9 @@ It has no runtime dependencies, and its parts can be used independently:
   token and provides convenience wrappers for Personal API data sets.
 - `gc-personal` is a command-line interface built on those same wrappers, with
   direct commands for scripts and an interactive menu for exploring the data.
+- [`garmin-connect-personal-api-mcp`](mcp/) is an MCP server that lets Claude
+  and other AI assistants answer questions about your sleep, HRV, training,
+  and more.
 
 ## Requirements and installation
 
@@ -211,6 +221,36 @@ await writeFile('activity-123456789.zip', content);
 
 The whole ZIP is held in memory. Unlike the CLI, `writeFile()` overwrites an
 existing file.
+
+## Examples
+
+The [`examples`](examples/) folder has ready-to-run scripts. Each one reads the
+key the same way the CLI does.
+
+| Script | What it does |
+| --- | --- |
+| [`sleep-report.js`](examples/sleep-report.js) | Prints a table of the last few nights' sleep stages, scores, and HRV |
+| [`export-daily-csv.js`](examples/export-daily-csv.js) | Exports daily steps, heart rate, stress, Body Battery, and sleep to CSV for spreadsheets |
+| [`backup-activities.js`](examples/backup-activities.js) | Downloads original activity files to a folder, skipping ones already saved; safe to schedule |
+| [`fetch-sleep.js`](examples/fetch-sleep.js), [`fetch-activities.js`](examples/fetch-activities.js), [`get-token.js`](examples/get-token.js) | Minimal starting points |
+
+```shell
+node examples/sleep-report.js --days 14
+node examples/export-daily-csv.js --start-date 2026-01-01 -o daily.csv
+node examples/backup-activities.js --dir ~/garmin-activities
+```
+
+## AI assistants (MCP)
+
+The [MCP server](mcp/) exposes every endpoint as a read-only tool, so you can
+ask Claude Desktop, Claude Code, or another MCP client about your data. To add
+it to Claude Code:
+
+```shell
+claude mcp add garmin --env GARMIN_PERSONAL_API_KEY=your-key -- npx -y garmin-connect-personal-api-mcp
+```
+
+See the [MCP server README](mcp/) for Claude Desktop and other clients.
 
 ## Endpoint wrappers
 

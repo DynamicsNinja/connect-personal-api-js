@@ -1,0 +1,52 @@
+name: Release
+
+# Publishing a GitHub release publishes the matching package to npm:
+#   v1.2.3      -> garmin-connect-personal-api-js (repository root)
+#   mcp-v1.2.3  -> garmin-connect-personal-api-mcp (mcp/)
+# Both packages use npm trusted publishing, so no npm token is stored here.
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Select package
+        id: package
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          case "$TAG" in
+            mcp-v*) echo "dir=mcp" >> "$GITHUB_OUTPUT"; echo "version=${TAG#mcp-v}" >> "$GITHUB_OUTPUT" ;;
+            v*) echo "dir=." >> "$GITHUB_OUTPUT"; echo "version=${TAG#v}" >> "$GITHUB_OUTPUT" ;;
+            *) echo "Unrecognized release tag: $TAG" >&2; exit 1 ;;
+          esac
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5.1 or newer.
+      - run: npm install -g npm@latest
+      - name: Check that the tag matches package.json
+        working-directory: ${{ steps.package.outputs.dir }}
+        env:
+          EXPECTED: ${{ steps.package.outputs.version }}
+        run: |
+          actual=$(node -p "require('./package.json').version")
+          if [ "$actual" != "$EXPECTED" ]; then
+            echo "Tag version $EXPECTED does not match package.json version $actual" >&2
+            exit 1
+          fi
+      - run: npm ci
+        working-directory: ${{ steps.package.outputs.dir }}
+      - run: npm test
+        working-directory: ${{ steps.package.outputs.dir }}
+      - run: npm publish --access public
+        working-directory: ${{ steps.package.outputs.dir }}
