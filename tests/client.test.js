@@ -198,7 +198,14 @@ test('a request that exceeds the timeout is aborted', async () => {
       init?.signal?.addEventListener('abort', () => reject(init.signal?.reason));
     });
   const client = new GarminPersonalApiClient('token', { fetch: slowFetch, timeoutSeconds: 0.01 });
-  await assert.rejects(client.getUserProfileSettings(), { name: 'TimeoutError' });
+  // AbortSignal.timeout() doesn't keep the event loop alive, and this fake
+  // request holds no socket, so keep the process running until it fires.
+  const keepAlive = setTimeout(() => {}, 5000);
+  try {
+    await assert.rejects(client.getUserProfileSettings(), { name: 'TimeoutError' });
+  } finally {
+    clearTimeout(keepAlive);
+  }
 });
 
 test('inspecting the client does not include the bearer token', () => {
