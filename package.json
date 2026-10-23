@@ -3,6 +3,15 @@
   "version": "1.0.0",
   "description": "JavaScript client for the Garmin Connect Personal API",
   "license": "Apache-2.0",
+  "author": "Ivan Ficko",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DynamicsNinja/connect-personal-api-js.git"
+  },
+  "homepage": "https://github.com/DynamicsNinja/connect-personal-api-js#readme",
+  "bugs": {
+    "url": "https://github.com/DynamicsNinja/connect-personal-api-js/issues"
+  },
   "type": "module",
   "exports": {
     ".": {
