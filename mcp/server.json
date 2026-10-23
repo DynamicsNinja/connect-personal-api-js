@@ -1,0 +1,33 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.DynamicsNinja/garmin-connect-personal-api",
+  "title": "Garmin Connect Personal API",
+  "description": "Read your Garmin sleep, HRV, steps, stress, Body Battery, and activities (unofficial)",
+  "version": "1.0.0",
+  "websiteUrl": "https://github.com/DynamicsNinja/connect-personal-api-js/tree/main/mcp#readme",
+  "repository": {
+    "url": "https://github.com/DynamicsNinja/connect-personal-api-js",
+    "source": "github",
+    "subfolder": "mcp"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "garmin-connect-personal-api-mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "GARMIN_PERSONAL_API_KEY",
+          "description": "Garmin Connect Personal API key from connect.garmin.com/app/settings/personalApiToken. Optional if the key is saved in ~/.config/garmin/connect-personal-api-key.",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
